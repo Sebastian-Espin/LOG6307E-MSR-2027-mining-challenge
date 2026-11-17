@@ -221,3 +221,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# GitSkills dataset downloaded by notebooks/data_extraction.ipynb (~13.4 GB)
+data/*
+!data/.gitkeep
