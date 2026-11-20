@@ -1,0 +1,10 @@
+# Data processing
+pandas>=2.2
+pyarrow>=15.0
+
+# Hugging Face Hub (dataset download via snapshot_download / HfApi)
+huggingface_hub>=0.23
+
+# Running the notebooks
+jupyterlab>=4.0
+ipykernel>=6.29
