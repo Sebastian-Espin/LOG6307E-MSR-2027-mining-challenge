@@ -22,7 +22,7 @@ data/
   repos_clean.csv                  cleaned dataset (committed)
   skills_copied.csv
   adoptions.csv
-  linguist_languages_v9.6.0.yml    GitHub Linguist language types
+  linguist_language_types.csv      language types from GitHub Linguist v9.6.0
   gitskills/                       raw download (git-ignored, ~13.4 GB)
 figures/                  figures used in the report
 requirements.txt
