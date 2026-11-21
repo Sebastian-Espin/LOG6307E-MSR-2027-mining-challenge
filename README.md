@@ -17,12 +17,12 @@ language, so in principle any project can reuse it. We use the
 notebooks/
   data_extraction.ipynb   download and first exploration of the raw dataset
   data_cleaning.ipynb     cleaning and construction of the CSV files in data/
-  data_analysis.ipynb     RQ1 analysis and figures
+  data_analysis.ipynb     RQ1 and RQ2 analyses and figures
 data/
   repos_clean.csv                  cleaned dataset (committed)
   skills_copied.csv
   adoptions.csv
-  linguist_language_types.csv      language types from GitHub Linguist v9.6.0
+  linguist_language_types.csv      language types, groups and aliases (GitHub Linguist v9.6.0)
   gitskills/                       raw download (git-ignored, ~13.4 GB)
 figures/                  figures used in the report
 requirements.txt
@@ -84,7 +84,7 @@ The three files are linked by `skill_id` and `repo_id`.
 | File | One row per | Main columns |
 |---|---|---|
 | `repos_clean.csv` | repository with at least one `SKILL.md` (282,200) | `language`, `language_kind`, `stars`, `n_distinct_skills`, `is_aggregator`, `eligible` |
-| `skills_copied.csv` | skill copied by at least 2 owners (230,355) | `file_sha`, `body_chars`, `has_scripts`, `has_references`, `sibling_count`, `n_owners`, `n_owners_eligible`, `n_languages` |
+| `skills_copied.csv` | skill copied by at least 2 owners (230,355) | `file_sha`, `body_chars`, `has_scripts`, `has_references`, `sibling_count`, `n_owners`, `n_owners_eligible`, `n_languages`, `code_languages`, `topic` |
 | `adoptions.csv` | (copied skill, repository) pair (1,382,321) | `skill_id`, `repo_id`, `n_paths` |
 
 Definitions used in `data_cleaning.ipynb`:
@@ -99,6 +99,22 @@ Definitions used in `data_cleaning.ipynb`:
   (`programming`, `markup`, `data`, `prose`), the release current when GitSkills was mined.
 - **Eligible repository:** not an aggregator, not a fork, and with a `programming` primary
   language. Only eligible repositories count in the language analyses.
+- **Code languages:** the tag of each fenced code block of a skill (```` ```python ````,
+  ```` ```ts ````...) mapped to a language with Linguist's names, aliases and groups.
+  `code_languages` lists the programming languages found (`;`-separated).
+- **Topic:** what the skill is for, from a topic model (TF-IDF + NMF, 12 topics) on its name and
+  description. Each topic is named after its 3 most important words; `none` means no English word.
 
 The full text of a skill is not in the CSV files. It can be read from the raw `artifacts` table
 using `file_sha`.
+
+## Analyses
+
+`data_analysis.ipynb` answers both research questions from the CSV files only:
+
+- **RQ1:** share of copied skills whose owners use more than one language, compared with a
+  permutation baseline (1,000 shuffles), and language-to-language sharing.
+  Figures: `rq1_language_crossing.pdf`, `rq1_language_heatmap.pdf`.
+- **RQ2:** universal skills (owners in ≥ 3 languages) vs. siloed skills (one language), matched
+  on number of owners. Characteristics are compared with Mann-Whitney U tests and Cliff's delta,
+  topics with a chi² test and Cramér's V. Figure: `rq2_characteristics.pdf`.
