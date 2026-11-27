@@ -1,0 +1,51 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\graphicspath{{../figures/}{./}}  % in the repo, figures/ sits next to report/; otherwise use this folder
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}   % \toprule, \midrule, \cmi
+\usepackage{xurl}       % \url, breakable anywhere
+\usepackage[hidelinks]{hyperref}
+
+% Wider text block: side margins reduced by 12pt each (columns 252pt -> 264pt)
+\addtolength{\textwidth}{24pt}
+\addtolength{\oddsidemargin}{-12pt}
+\addtolength{\evensidemargin}{-12pt}
+\setlength{\columnwidth}{\dimexpr(\textwidth-\columnsep)/2\relax}
+
+% Lets the authors wrap onto a second row (2 x 2 grid)
+\makeatletter
+\newcommand{\linebreakand}{%
+  \end{@IEEEauthorhalign}
+  \hfill\mbox{}\par
+  \mbox{}\hfill\begin{@IEEEauthorhalign}
+}
+\makeatother
+
+\begin{document}
+
+\title{Siloed or Universal? An Empirical Study of Cross-Language Agent Skill Reuse in GitSkills}
+
+\author{\IEEEauthorblockN{Tristan Lachance (2141919)}
+\and
+\IEEEauthorblockN{Laurel Tremblay (2141998)}
+\linebreakand
+\IEEEauthorblockN{Sebastian Espin Ontiveros (2132717)}
+\and
+\IEEEauthorblockN{Jonathan Roy-Ascanio (2152552)}
+}
+
+\maketitle
+
+% All the body text (abstract -> conclusion) lives in report.tex
+\input{report}
+
+% ---------------------------------------------------------------
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
